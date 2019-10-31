@@ -14,19 +14,22 @@
     <div id="buttons">
 
     </div>
-
-    
-        
-
     <script>
-        
+        const story = {
+            intro: {
+                text: `You wake up in the sand on the coast of somewhere
+                 in russia You get up and walk to some houses you see in
+                 the distance so You walk to them and see a sign reading
+                 Kamiwobo 1km & Elektro 4km Are down west on the road and
+                 And on the other side it says Solnichy 2km North on the road`
+            }
+        }
+
         let storyContainer = document.getElementById("story")
-
         storyContainer.innerHTML = "";
-
         let buttonContainer = document.getElementById("buttons")
-
-        choices = ["one", "two", "three"];
+        
+        choices = ["Kamiwobo", "Elektro", "Solnitchy"]
 
         for(let choice of choices){
             makeButton(choice)
@@ -35,33 +38,26 @@
         function makeButton(btnText, choice){
             let button = document.createElement
             ("button");
-
             button.innerHTML = btnText;
-
             buttonContainer.appendChild(button);
-
             button.addEventListener ("click", function 
             () {
             alert ("Chose" + choice);
             });
             }
 
-
-            function showStory(text) {
-                let storyItem = document.createElement("p");
-
-                storyItem.innerText = text;
-
-                storyContainer.appendChild(storyItem);
-
+        function showStory(text) {
+            let storyItem = document.createElement("p");
+            storyItem.innerText = text;
+            storyContainer.appendChild(storyItem);
             }
 
-            showStory(story.intro);
+        showStory(story.intro.text);
+
+
+            
         
-        story
-            intro
-                 "You wake up in the sand on the coast of somewhere in russia You get up and walk to some houses you see in the distance so You walk to them and see a sign reading Kamiwobo 1km & Elektro 4km Are down west on the road and And on the other side it says Solnichy 2km North on the road"
-                chocies = ["Kamiwobo", "Elektro", "Solnitchy"]
+        
     </script>
     
     
