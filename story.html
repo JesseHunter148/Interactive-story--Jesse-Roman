@@ -67,12 +67,32 @@
                 ]
             },
             Elek2 : {
-                text : ``,
+                text : `You run around Kamiwobo and start the long walk to Elektro, you get there but your very dehydrated so you start to look for water in the houses and find 3 cans of soda, a baseball bat, and a police jacket. You drink a can of soda and continue looting and attract the attention of a few zombies`,
                 choices: [
-                    [],
-                    []
+                    ["Fight", "elekfight"],
+                    ["Run", "elekrun"]
                 ]
-                }
+            },
+            elekfight : {
+                text : ` You backup a little and put the bat up on your shoulder and swing hitting one square in the head knocking it to the ground and hit the other one knocking him down but not as hard as you swing it back to your shoulder, readying to swim and hit the last one but a gunshot rings out and the zombie is on the ground and behind it you see a woman standing there with a shotgun in her hand and she runs over to you to check if your bit and she urges you to get inside the building and talks to you about a group of survivors in the west that she is trying to head too and left with you with some medical supplies and water and went off into the woods and now you come to a decision that your best option is to look for this town of safety.`,
+                choices : [
+                    ["Look for the town", "elektown"],
+                    ["Venture in", "elekven"]
+                ]
+            },
+            kam3 : {
+                text : `You head inland with him and you guys walk along the dirt path talking about what each other have experienced and sharing stories and they swerve off the dirt path through the black forest and come out just outside the military base Stary, you guys head in and look around and find a nice bomber jacket, some combat pants, a backpack along and SG5-K. You were organizing yourself and the officer turned around the corner in full military gear and an SKS with a scope and everything and he urges that you guys keep a move on night will fall soon and you dont wanna be without shelter at night. As you continue on you realize that he is a little suspicious and you begin to be cautious around him He starts running into the woods and urges you catch up but you wait for him to turn his back and you seperate and start making your way to the town you’ve heard of in stary. You come to the gate and it's dark you scream into the walls to get their attention and suddenly the gate opens and three men come out with rifles and bring you inside and ask you where you came from, you tell them of the man you've been following and they look surprised informing you that you're lucky you got away, people are known for doing that then betraying them for gear. They feed you and inform of the war they are in and ask if you could help.`,
+                choices : [
+                    ["Help in war", "kamwaryes"],
+                    ["refuse to help", "kamwarno"]
+                ]         
+            },
+            kamialone : {
+                text : `You help him get out and you guys part ways, your left with heading more west for another good way inland, you head to elektro and loot up their finding some miscellaneous  food items, nicer pants and in the police station you found a box of .380 so you load your IJ-70 as well as change into some police clothes, you run into a few zombies but are able to avoid them and make it to the edge of town where the pathway inland begins and you need to make a plan of where your gonna go first and if it's possible with the gear you have on you.  You decide you should head to the little town you've been hearing of in stary, you begin your walk there and make it to the gate as the sun is setting and you get the attention of the people inside, three armed men come out with rifles pointed at you asking where you came from and what do you want, they demand that you drop your all your weapons for them to take, do you?`,
+                choices : [
+                    ["No", "kamialoneno"],
+                    ["yes", "kamialoneyes"]
+                ]
             },
 
         let storyContainer = document.getElementById("story")
