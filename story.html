@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>DayZ Interactive Story - Jesse, Roman</title>
 </head>
 <body>
+
+    <p>DayZ Interactive Story by Jesse and Roman</p> 
+
     <div id="story">
 
     </div>
@@ -14,7 +17,59 @@
     <div id="buttons">
 
     </div>
+
     <script>
+
+        /* 
+        /  this function takes the text from the const and puts it 
+        /  into a button as well as link it to the next choice in the
+        /  const and make it all pop up and work
+        */
+
+        function makeButton(btnText, choice){
+            let button = document.createElement("button");
+            button.innerHTML = btnText;
+            buttonContainer.appendChild(button);
+            button.addEventListener ("click", function () {
+                history.push(choice);
+                playStory();
+            });
+        }
+
+        /*
+        / This function takes the input from the const and puts it on
+        / the screen it also links it with buttons and connects it to
+        / the correct buttons
+        */
+
+        function playStory() {
+            let currentPage = history[history.length - 1]; 
+            storyContainer.innerHTML = ""; 
+            buttonContainer.innerHTML = ""; 
+            for(let page of history){ 
+                makeStory(story[page].text);
+            }
+            for(let choice of story[currentPage].choices){ 
+                makeButton(choice[0], choice[1])
+            }
+        }
+
+        /* 
+        / this function makes the story segemnt selected pop up on screen
+        */
+
+        function makeStory(text) {
+            let storyItem = document.createElement("p");
+            storyItem.innerText = text;
+            storyContainer.appendChild(storyItem);
+        }
+
+        let storyContainer = document.getElementById("story")
+
+        let buttonContainer = document.getElementById("buttons")
+
+        let history = ["intro"]
+
         const story = {
             intro: {
                 text: `You wake up in the sand on the coast of somewhere in russia You get up and walk to some houses you see in the distance so You walk to them and see a sign reading Kamiwobo 1km & Elektro 4km Are down west on the road and And on the other side it says Solnichy 2km North on the road`,
@@ -245,7 +300,7 @@
                 ]
             },
             A4 : {
-                text : `Matthew stops you and says he wont let you do that as you saved him before now its his turn1`,
+                text : `Matthew stops you and says he wont let you do that as you saved him before now its his turn.     You return safely after the fight, you return to the town and tell the people of the good news but they ask where Matthew is and you have to tell them what happened and the decision that Matthew made for the better of the people in the village`,
                 choices : [
                     ["The end"]
                 ]
@@ -294,44 +349,10 @@
             }
         }
 
-        let storyContainer = document.getElementById("story")
+        playStory(); 
 
-        let buttonContainer = document.getElementById("buttons")
-
-        let history = ["intro"]
-
-        function makeButton(btnText, choice){
-            let button = document.createElement("button");
-            button.innerHTML = btnText;
-            buttonContainer.appendChild(button);
-            button.addEventListener ("click", function () {
-                history.push(choice);
-                showStory();
-            });
-        }
-
-        function showStory() {
-            let currentPage = history[history.length - 1]; 
-            storyContainer.innerHTML = ""; 
-            buttonContainer.innerHTML = ""; 
-            for(let page of history){ 
-                buildStory(story[page].text);
-            }
-            for(let choice of story[currentPage].choices){ 
-                makeButton(choice[0], choice[1])
-            }
-        }
-
-        function buildStory(text) {
-            let storyItem = document.createElement("p");
-            storyItem.innerText = text;
-            storyContainer.appendChild(storyItem);
-        }
-
-        showStory();
-        
     </script>
-    
-    
+
+
 </body>
 </html>
