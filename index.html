@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DayZ Interactive Story - Jesse, Roman</title>
+</head>
+<body>
+
+    <p>DayZ Interactive Story by Jesse and Roman</p> 
+
+    <div id="story">
+
+    </div>
+
+    <div id="buttons">
+
+    </div>
+
+    <script>
+
+        /* 
+        /  this function takes the text from the const and puts it 
+        /  into a button as well as link it to the next choice in the
+        /  const and make it all pop up and work
+        */
+
+        function makeButton(btnText, choice){
+            let button = document.createElement("button");
+            button.innerHTML = btnText;
+            buttonContainer.appendChild(button);
+            button.addEventListener ("click", function () {
+                history.push(choice);
+                playStory();
+            });
+        }
+
+        /*
+        / This function takes the input from the const and puts it on
+        / the screen it also links it with buttons and connects it to
+        / the correct buttons
+        */
+
+        function playStory() {
+            let currentPage = history[history.length - 1]; 
+            storyContainer.innerHTML = ""; 
+            buttonContainer.innerHTML = ""; 
+            for(let page of history){ 
+                makeStory(story[page].text);
+            }
+            for(let choice of story[currentPage].choices){ 
+                makeButton(choice[0], choice[1])
+            }
+        }
+
+        /* 
+        / this function makes the story segemnt selected pop up on screen
+        */
+
+        function makeStory(text) {
+            let storyItem = document.createElement("p");
+            storyItem.innerText = text;
+            storyContainer.appendChild(storyItem);
+        }
+
+        let storyContainer = document.getElementById("story")
+
+        let buttonContainer = document.getElementById("buttons")
+
+        let history = ["intro"]
+
+        const story = {
+            intro: {
+                text: `You wake up in the sand on the coast of somewhere in russia You get up and walk to some houses you see in the distance so You walk to them and see a sign reading Kamiwobo 1km & Elektro 4km Are down west on the road and And on the other side it says Solnichy 2km North on the road`,
+                choices : [
+                    ["Kamiwobo", "kam1"],
+                    ["Elektro", "elek1"],
+                    ["solnitchy", "sol1"]
+                ]
+            },
+            kam1 : {
+                text: `You turn west and start walking down the road, your thirsty but not direly, you have nothing but some rags a glow stick and a small plum in your jean pockets and the only warmth you have is from your hoodie, you continue down the road at a steady pace and make have nothing but some rags a glow stick and a small plum in your jean pockets and the only warmth you have is from your hoodie, you continue down the road at a steady pace and make in to the town of Kamiwobo and begin to search houses, you find scraps of food a water bottle and a tire iron. You realize your pretty thirsty and know there's a well on the other side of town so you head over to rehydrate. While drinking you hear a shuffle behind you so you try to pick up your stuff and get out quietly but in the process you trip and scramble to your feet only to look up and see a group of three looking at you.`,
+                choices : [
+                    ["Fight", "kamyes"],
+                    ["Run", "kamno"]
+                ]
+            },
+            elek1 : {
+                text: `You turn west and start walking down the road, your thirsty but not direly, you are heading down the road and you come up on kamiwobo do you go through and loot a little or do you run around the town and keep on the route to Elektro?`,
+                choices : [
+                    ["Stop at Kamiwobo", "kam2"],
+                    ["Continue to Elektro", "Elek2"]
+                ]
+            },
+            sol1 : {
+                text: `You turn north and start walking up the road stopping at a few houses that where along the road, you find a box of 12g shells, an apple, and a golf club. You continue to Solnitchy but as you get closer and closer you hear a rain of gunfire but you continue on and enter the town of Solnitchy looting the first few houses nothing but some food scraps and a beanie, you hear the gunfire continuing do you go to it?, or just loot in your area`,
+                choices : [
+                    ["Fight", "solfight"],
+                    ["Run", "solrun"]
+                ]
+            },
+            kam2 : {
+                text: `You show up at Kamiwobo and begin to loot on the main road to get in and out as fast as possible. You begin to search houses, you find scraps of food a water bottle and a tire iron. You realize your pretty thirsty and know there's a well on the other side of town so you head over to rehydrate. While drinking you hear a shuffle behind you so you try to pick up your stuff and get out quietly but in the process you trip and scramble to your feet only to look up and see a group of three looking at you.`,
+                choices : [
+                    ["Fight", "kamyes"],
+                    ["Run", "kamno"]
+                ]
+            },
+            kamyes : {
+                text : `You ready yourself and they start to charge you, you raise your tire iron and swing hard down on one's head but it keeps coming and you keep backing up and swinging you take one down finnaly but the other two are getting closer and closer to getting you and you suddenly hear too loud bangs and the two zombies are dead in front of you and there's an officer standing there and he rushes over to check if your hurt. You guys move into a building and you regather yourself in the safety of a house. He asks for your name and where you came from, he tells you of a plan and a group of survivors he knows of that is inland around Stary Sober. He asks you if you want to join him saying you guys have a better chance of survival together and will be guaranteed safety once with the group of survivors. He tells you that you got a few minutes to decide while he packs up his bags and readys himself and hands you an IJ-7 “Its empty but it's better than nothing, whether you come with me or not, I want you to keep it” , he says`,
+                choices : [
+                    ["Go with him", "Kami3"],
+                    ["Go alone", "GAMEENDED"]
+                ]
+            },
+            kamno : {
+                text : `You run and hide in a nearby house you hear more and more zombies piling up at the door and you are hiding in the room and lay down in the bedroom and pass out for an unknown amount of time but you get jerked away by the sound of three gunshots cracking and going through the front door along with the sound of three bodies dropping and a police officer came running in and barricades the door behind him. He sees you sitting there and freezes staring at you. “Oh uh hi im sorry I didn't think anyone was here, are you ok?”, he says Suddenly the door bounces in and he pushes it back shut and moves a nearby dresser in front of it. “Look kid, we only have a little longer till more surround the building and we will be trapped here for days” he says panting out of breath and visibly starting to stress, “There's a group of people, good people, their in stary sober they can keep you safe and supply you with what you need” He gives you his spare IJ-70 with an empty mag and says you have a few minutes to decide if not you guys can part ways.`,
+                choices : [
+                    ["Go with him", "Kami3"],
+                    ["Go alone", "kamialone"]
+                ]
+            },
+            Elek2 : {
+                text : `You run around Kamiwobo and start the long walk to Elektro, you get there but your very dehydrated so you start to look for water in the houses and find 3 cans of soda, a baseball bat, and a police jacket. You drink a can of soda and continue looting and attract the attention of a few zombies`,
+                choices: [
+                    ["Fight", "elekfight"],
+                    ["Run", "elekrun"]
+                ]
+            },
+            elekfight : {
+                text : ` You backup a little and put the bat up on your shoulder and swing hitting one square in the head knocking it to the ground and hit the other one knocking him down but not as hard as you swing it back to your shoulder, readying to swim and hit the last one but a gunshot rings out and the zombie is on the ground and behind it you see a woman standing there with a shotgun in her hand and she runs over to you to check if your bit and she urges you to get inside the building and talks to you about a group of survivors in the west that she is trying to head too and left with you with some medical supplies and water and went off into the woods and now you come to a decision that your best option is to look for this town of safety.`,
+                choices : [
+                    ["Look for the town", "elektown"],
+                    ["Venture in", "elekven"]
+                ]
+            },
+            Kami3 : {
+                text : `You head inland with him and you guys walk along the dirt path talking about what each other have experienced and sharing stories and they swerve off the dirt path through the black forest and come out just outside the military base Stary, you guys head in and look around and find a nice bomber jacket, some combat pants, a backpack along and SG5-K. You were organizing yourself and the officer turned around the corner in full military gear and an SKS with a scope and everything and he urges that you guys keep a move on night will fall soon and you dont wanna be without shelter at night. As you continue on you realize that he is a little suspicious and you begin to be cautious around him He starts running into the woods and urges you catch up but you wait for him to turn his back and you seperate and start making your way to the town you’ve heard of in stary. You come to the gate and it's dark you scream into the walls to get their attention and suddenly the gate opens and three men come out with rifles and bring you inside and ask you where you came from, you tell them of the man you've been following and they look surprised informing you that you're lucky you got away, people are known for doing that then betraying them for gear. They feed you and inform of the war they are in and ask if you could help.`,
+                choices : [
+                    ["Help in war", "kamwaryes"],
+                    ["refuse to help", "kamwarno"]
+                ]         
+            },
+            kamialone : {
+                text : `You help him get out and you guys part ways, your left with heading more west for another good way inland, you head to elektro and loot up their finding some miscellaneous  food items, nicer pants and in the police station you found a box of .380 so you load your IJ-70 as well as change into some police clothes, you run into a few zombies but are able to avoid them and make it to the edge of town where the pathway inland begins and you need to make a plan of where your gonna go first and if it's possible with the gear you have on you.  You decide you should head to the little town you've been hearing of in stary, you begin your walk there and make it to the gate as the sun is setting and you get the attention of the people inside, three armed men come out with rifles pointed at you asking where you came from and what do you want, they demand that you drop your all your weapons for them to take, do you?`,
+                choices : [
+                    ["No", "kamialoneno"],
+                    ["yes", "kamialoneyes"]
+                ]
+            },
+            kamialoneyes : {
+                text : `They take you inside and you guys talk for awhile they feed you and supply with a roof to sleep under, they tell you of this war they have been in with a group of guys who hold up in gorka who have terrorising these people since the outbreak hit and their plan to take them out once and for all before they can take us out. Things get kinda quiet and they ask you if you'd be willing to fight for these people, they are down to only these three guys and they had to act fast. They take you inside and you guys talk for awhile they feed you and supply with a roof to sleep under, they tell you of this war they have been in with a group of guys who hold up in gorka who have terrorising these people since the outbreak hit and their plan to take them out once and for all before they can take us out. Things get kinda quiet and they ask you if you'd be willing to fight for these people, they are down to only these three guys and they had to act fast.`,
+                choices : [
+                    ["No", "kam2warno"],
+                    ["yes", "kam2waryes"]
+                ]
+            },
+            kamialoneno : {
+                text: `They cant trust you and end up killing you.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            solrun: {
+                text : `You run into the nearby building and look out the window and see someone run around the corner with zombies behind him and he shoots one gathering the attention of the three at the door and they charge him tackling him to the ground and he is struggling to hold him off of him. You run out to help him pulling the zombies off and and trying to save him, his friends come around the corner and take care of the other zombies while the stranger gets back up to his feet. They settle and ask who you are and thank you for saving him. They introduce themselves as Loudout, Flip, and Matt. You ask why they were shooting so much and they explain the situation there in, the war between the group of people that hold up in Stary Sobor that has always been out to get a hold of the town they are living in because of the clean water source they have. They offer you to come along and you agree, they give you some water and you guys start the walk up to stary, on the way they tell you of the war they've been involved in and how they could use any help they can get. They ask if you will help them…`,
+                choices : [
+                    ["Help them", "solwaryes"],
+                    ["Dont help them", "solwarno"]
+                ]
+            },
+            solfight: {
+                text : `You fight the zombies off and hear footsteps approaching you swing rapidly and take the three down and try to run but your stopped by three armed men holding you at gunpoint. They see your unarmed and lower their guns asking if your ok and offer you some food and drink, you all sit down in a nearby house and relax after that. They introduce themselves as Loudout, Flip, and Matt. You ask why they were shooting so much and they explain the situation there in, the war between the group of people that hold up in Stary Sobor that has always been out to get a hold of the town they are living in because of the clean water source they have. They offer you to come along and you agree, they give you some water and you guys start the walk up to stary, on the way they tell you of the war they've been involved in and how they could use any help they can get. They ask if you will help them…`,
+                choices : [
+                    ["Yes", "sol2waryes"],
+                    ["No", "sol2warno"]
+                ]
+            },
+            elekrun : {
+                text : `You run into the closest house and lock the door and hear them on the other side of you hear the zombies and then you hear a shotgun blast and their interest was suddenly on this girl you see through the window and she gets tackled down and killed by the zombies then there was a gunshot on the other side of town and they sprinted off in that direction, you loot her body and pick up some food, water, shotgun with a handful of shells, and a map leading to an inland town with safety and an arrow pointed to it written on the paper of the map. You decide you need to head inland one way or another and you grab your stuff and start the trek inland.`,
+                choices: [
+                    ["Look for town", "elektown"],
+                    ["Head inland", "elekven"]
+                ]
+            },
+            elektown : {
+                text: `You head in and follow the directions to the town and you see it in the distance, you see small lights moving around and some glow from fire. You come up to the walls and start to knock on it and yell trying to get their attention and you see the front gate start to open and armed men come out and make sure your not a threat before they ask you where your came from and take you inside. You get grouped with this group of three guys, they introduce themselves as loadout, flip, and matthew they ask you if your a fighter, they sit you down and tell you about the war they are in and why they need your help, in this small village, these were the only three capable fighters, there where more but they had lost them in a gunfight with the other town that has been taking advantage and running them to the ground since the beginning.`,
+                choices: [
+                    ["Help in the war", "elekwaryes"],
+                    ["Dont help in war", "elekwarno"]
+                ]
+            },
+            elekven : {
+                text : `It's starting to get dark and you go into a nearby cabin to take shelter for the night, it's cold in their and the bed is dirty but you lay down and try to get some rest. You doze off for an unknown amount of time but you woke up to muffled talking and flashlights being shone through the windows, and the door opened with three men falling in and closing it behind them then they all took off their mask and took deep breaths, they didn't see you and you were lying under a thin blanket in the corner of the kitchen, scared you slowly sit up and they jumped and all aimed the guns at you but after realizing your not a threat they ask if your ok and give you food and warm you up. They tell you they are from the town not too far away where they can guarantee safety if you contribute to it, and you guys head out and start the walk to it, its pitch black outside other then the light from there glow sticks and and lights, One of them look over and see you shivering and he pulls a hand warmer out of his bag and tosses it to you and says “the names flip” eventually you guys make it to the base and they take you inside and introduce you to everyone. They sit you down and tell you about the war they are in and why they need your help, in this small village, these were the only three capable fighters, there where more but they had lost them in a gunfight with the other town that has been taking advantage and running them to the ground since the beginning.`,
+                choices : [
+                    ["Help in the war", "elek2waryes"],
+                    ["Dont help in war", "elek2waryes"]
+                ]
+            },
+            elekwaryes :{
+                text: `	They show you to a room filled with gear and tell you that you can have anything and to meet them at the front in the morning for a quick breakfast then they will head out and loot for the day, you grabbed some better clothes, guns, and ammo then you head off to the building they said you can stay in and you doze off till your woken up by the sun coming through the windows and hits your face then you get up and go to the gate where the three guys are standing there waiting for you and they toss you a can of corn and a knife to open it with and you guys start to head out and you begin looting around the nearby towns and military bases you notice these guys are really good at what they do you begin to have trouble keeping up. and make it to the nearest town and begin looting, they see you struggling and felipe teaches you lots of helpful tips and you become pretty good friends with him. While your in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. Felipe and Matthew are arguing over who's gonna do it, who do you choose to do it.`,
+                choices: [
+                    ["Matthew", "A3"],
+                    ["Felipe", "A1"]
+                ]
+            },
+            elekwarno :{
+                text: `They seem disappointed and show you to the house but on the way you see lots of small children and women farming and living in fear of the next attack, you make it back to your house and struggle sleeping and wake up in a cold sweat suddenly regretting turning them down and grab your shotgun and ran out to meet them at the gate as they are about to leave and they watch you with a smile on your face as you come up and tell them you want to help and you begin your adventure, you are struggling with the small amount of gear you have but they teach you how to survive and you become good friends with loadout and he gives you his spare gear. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see felipe on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot loadout and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it.Its you and felipe waiting there he says he will do it but you have the explosives.`,
+                choices: [
+                    ["Felipe", "B3"],
+                    ["Yourself", "C2"]
+                ]
+            },
+            elek2waryes :{
+                text: `They show you to a room filled with gear and tell you that you can have anything and to meet them at the front in the morning for a quick breakfast then they will head out and loot for the day, you grabbed some better clothes, guns, and ammo then you head off to the building they said you can stay in and you doze off till your woken up by the sun coming through the windows and hits your face then you get up and go to the gate where the three guys are standing there waiting for you and they toss you a can of corn and a knife to open it with and you guys start to head out and you begin looting around the nearby towns and military bases you notice these guys are really good at what they do you begin to have trouble keeping up. and make it to the nearest town and begin looting, they see you struggling and felipe teaches you lots of helpful tips and you become pretty good friends with him. While your in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. Loadout and Matthew are arguing over who's gonna do it, who do you choose to do it.`,
+                choices: [
+                    ["Loadout", "A2"],
+                    ["Matthew", "A3"]
+                ]
+            },
+            elek2warno :{
+                text: `They seem disappointed and show you to the house but on the way you see lots of small children and women farming and living in fear of the next attack, you make it back to your house and struggle sleeping and wake up in a cold sweat suddenly regretting turning them down and grab your shotgun and ran out to meet them at the gate as they are about to leave and they watch you with a smile on your face as you come up and tell them you want to help and you begin your adventure, you are struggling with the small amount of gear you have but they teach you how to survive and you become good friends with loadout and he gives you his spare gear. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see felipe on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot loadout and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it.Its you and matthew waiting there he says he will do it but you have the explosives.`,
+                choices: [
+                    ["Matthew", "B3"],
+                    ["Yourself", "C1"]
+                ]
+            },
+            kamwaryes:{
+                text: `They smile and thank you getting up and leading you to the armory and tell you to grab anything you need and to meet at the front gate next morning for breakfast then they will headout for the day. You go to the house they appointed you too and you rest till the next morning and meet the guys at the gate and you guys head out, you loot all the nearby towns and military bases and as you do you notice how good these guys are at what they do, they notice your having trouble keeping up and seem annoyed with you but you get better and overcome it and learn how to be efficient and survive out there with a few tips from the guys. While your in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. It was only you and felipe standing there, he says that he will do it but you already have them.`,
+                choices: [
+                    ["Felipe", "A1"],
+                    ["Yourself", "C2"]
+                ]
+            },
+            kamwarno:{
+                text: `You go back to the house, on the way you see all the children and families that have lost so much already and are living in fear of losing even more, you sleep terribly that night and in the morning you decide to run and catch up, they greet you with a smile and chuckle and Felipe gives you the rest of his breakfast, you guys begin your adventure, learning many things from felipe on the way and becoming very close friends with felipe. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see felipe on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot felipe and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. You and Loadout are standing there and you know someone has to do it.`,
+                choices: [
+                    ["Loadout", "B2"],
+                    ["Yourself", "C1"]
+                ]
+            },
+            kam2waryes:{
+                text: `They smile and thank you getting up and leading you to the armory and tell you to grab anything you need and to meet at the front gate next morning for breakfast then they will headout for the day. You go to the house they appointed you too and you rest till the next morning and meet the guys at the gate and you guys head out, you loot all the nearby towns and military bases and as you do you notice how good these guys are at what they do, they notice your having trouble keeping up and seem annoyed with you but you get better and overcome it and learn how to be efficient and survive out there with a few tips from the guys. While your in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. It was only you matthew and felipe standing there, he says that he will do it but you already have them.`,
+                choices: [
+                    ["Felipe", "A1"],
+                    ["Matthew", "A3"]
+                ]
+            },
+            kam2warno:{
+                text: `You go back to the house, on the way you see all the children and families that have lost so much already and are living in fear of losing even more, you sleep terribly that night and in the morning you decide to run and catch up, they greet you with a smile and chuckle and Felipe gives you the rest of his breakfast, you guys begin your adventure, learning many things from felipe on the way and becoming very close friends with felipe. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see felipe on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot felipe and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. You and Matty are standing there and you know someone has to do it.`,
+                choices: [
+                    ["Loadout", "B2"],
+                    ["Yourself", "C1"]
+                ]
+            },
+            solwaryes:{
+                text: `They take you back to their camp for the night and let you take any gear you want and let rest for the night, they tell you to meet them at the front gate for breakfast then to head out for the day to adventure, you go to the house they assigned you and you rest up for the night. The next morning you guys meet at the gate and loadout gives you some of his breakfast, you continue into looting and you guys are in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. Its you and Matty there and begs you to let him do it`,
+                choices: [
+                    ["Matty", "A3"],
+                    ["Yourself", "A4"]
+                ]
+            },
+            solwarno:{
+                text: `They seem bummed you said no but they take you back to their base and appoint you to an assigned housing in the town and tell you to get some sleep. On the way you see all the families living there and the situation their in and you sleep terribly that night. The next morning you ran out to meet them at the gate as they are about to leave and they watch you with a smile on your face as you come up and tell them you want to help and you begin your adventure, you are struggling with the small amount of gear you have but they teach you how to survive and you become good friends with matty and he gives you his spare gear since you saved his life earlier and you guys just make good friends right off the bat. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see matty on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot matty and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it.`,
+                choices: [
+                    ["Felipe" , "B1"],
+                    ["Loadout", "B4"]
+                ]
+            },
+            sol2waryes:{
+                text: `They take you back to their camp for the night and let you take any gear you want and let rest for the night, they tell you to meet them at the front gate for breakfast then to head out for the day to adventure, you go to the house they assigned you and you rest up for the night. The next morning you guys meet at the gate and loadout gives you some of his breakfast, you continue into looting and you guys are in an unmarked town you hear a group of men ransacking the town. The three run over to ambush them and tell you to come help them out with the ambush, you set up with them in a building on the side of the road and prepare yourself, you see them walking down the street and felipe pulls a flashbang from his vest tosses it and within a few seconds of gunfire they were all gone. As you guys went outside and look at the guys and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base now. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it. Its you, Felipe and Matty there and begs you to let him do it`,
+                choices: [
+                    ["Felipe", "A1"],
+                    ["Matthew", "A3"]
+                ]
+            },
+            sol2warno :{
+                text: `They seem bummed you said no but they take you back to their base and appoint you to an assigned housing in the town and tell you to get some sleep. On the way you see all the families living there and the situation their in and you sleep terribly that night. The next morning you ran out to meet them at the gate as they are about to leave and they watch you with a smile on your face as you come up and tell them you want to help and you begin your adventure, you are struggling with the small amount of gear you have but they teach you how to survive and you become good friends with matty and he gives you his spare gear since you saved his life earlier and you guys just make good friends right off the bat. You are in an unmarked town and you hear gunshots from the other side of town and the sound of multiple men ransacking the town. The three run over to ambush them and tell you to stay back since you don't have as much gear as them so you stay back a little and hear a mist of gunfire, you run over and turn down the street to see the enemies all on the ground and you see matthew and loadout come sprinting out of the building to grab you and bring into the building as you sprint into the building you see matty on the ground, he had gotten shot in the lower stomach multiple times and was in a state of shock, and they have determined that he is gone, it fell silent and matty pulled out his mlock and put him out, you guys go outside and look at the guys who shot matty and find lots of ammo, explosives and a map. They were on their way to blow up the city and we had just stopped it, but on the map it showed the location of their headquarters and loadout decides your going to follow it and use these explosives on their base. You follow the map to the base and end up just outside of it, you see guards and men everywhere, you guys decide the only plan of attack is to get in their and blow it up, but they needed a distraction, there was a nearby gas station you knew off, if you shoot the tank it’ll blow up and attract every zombie in a 4km radius and when they go to check it out the horde will follow them back to the base causing a mess for them to deal with and that's when you guys can slip in and plant the explosives on the central gas tank blowing this whole place to smithereens, you tell the others and they set up to put this motion, a sniper up in the tree focused on the gas station and the others ready to charge in while they are out of the base, The plan was set in motion and sure enough they fled the base to check what was going on and why, you charged into the base it was beautifully executed you got in a met any interference with sheer brute force and fought your way to the gas tank and you finally get there but you guys waiting around the gas tank when one fatel thought set into all of you, this was a suicide mission, they didnt plan on a remote detonation, in silence you all came to an agreement that someone would have to detonate it.`,
+                choices: [
+                    ["Felipe", "B1"],
+                    ["Loadout", "B4"]
+                ] 
+            },
+            A1 : {
+               text: `You return safely after the fight, you return to the town and tell the people of the good news but they ask where Felipe is and you have to tell them what happened and the decision that Felipe made for the better of the people in the village`, 
+               choices : [
+                   ["The end"]
+               ]
+            },
+            A2 : {
+                text : `You return safely after the fight, you return to the town and tell the people of the good news but they ask where Loadout is and you have to tell them what happened and the decision that Loadout made for the better of the people in the village`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            A3 : {
+                text : ` You return safely after the fight, you return to the town and tell the people of the good news but they ask where Matthew is and you have to tell them what happened and the decision that Matthew made for the better of the people in the village`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            A4 : {
+                text : `Matthew stops you and says he wont let you do that as you saved him before now its his turn.     You return safely after the fight, you return to the town and tell the people of the good news but they ask where Matthew is and you have to tell them what happened and the decision that Matthew made for the better of the people in the village`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            B1 : {
+                text: `You return safely after the fight, you return to the town and tell the people of the good news but they ask where Loadout  and Felipe is and you have to tell them what happened and the decision that Felipe made for the better of the people in the village.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            B2 : {
+                text: `You return safely after the fight, you return to the town and tell the people of the good news but they ask where Felipe and Loadout is and you have to tell them what happened and the decision that Loadout made for the better of the people in the village.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            B3 : {
+                text: ` You return safely after the fight, you return to the town and tell the people of the good news but they ask where Felipe and Matthew is and you have to tell them what happened and the decision that Matthew made for the better of the people in the village.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            B4 : {
+                text: `You return safely after the fight, you return to the town and tell the people of the good news but they ask where Loadout and Matthew is and you have to tell them what happened and the decision that Matthew made for the better of the people in the village.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            C1 : {
+                text: `Your story ends here you run in and ready the explosives on their central gas tank, you sit down and look around pondering what youve got yourself into then shruged it off and grabbed the detonator.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            C2 : {
+                text: `Your story ends here you run in and ready the explosives on their central gas tank, you sit down and look around pondering what youve got yourself into then shruged it off and grabbed the detonator. You go unconscious and wake up to a sunny morning in a destroyed city and you gather yourself, wounded but capable and make it back to the village.`,
+                choices : [
+                    ["The end"]
+                ]
+            },
+            GAMEENDED : {
+                text: `You turn around and begin to walk away, you are packed and ready to head inland, then suddenly there was a crackle and everything ended, he shot you in the back of the head as you were walking away.`,
+                choices : [
+                    ["The end"]
+                ]
+            }
+        }
+
+        playStory(); 
+
+    </script>
+
+
+</body>
+</html>
